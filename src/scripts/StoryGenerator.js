@@ -45,13 +45,13 @@ export class StoryGenerator {
 
         word = word.replace(":", "").replace(":", "");
         // word = word.replace(":", "}");
-        let comma = "";
+        let suffix = "";
         if (word.substr(word.length - 1, 1) == ",") {
             word = word.substr(0, word.length-1);
-            comma = ", ";
+            suffix = ", ";
         } else if (word.substr(word.length - 1, 1) == ".") {
             word = word.substr(0, word.length-1);
-            comma = ". ";
+            suffix = ". ";
         }
 
         console.log(word);
@@ -87,6 +87,16 @@ export class StoryGenerator {
             default:
                 throw `Cannot find alternative for word`;
         }
-        return word + comma;
+        return word + suffix;
     }
 }
+
+const o = (function() {
+    let x = 123;
+    function getId() {
+        return x;
+    }
+    return getId();
+})();
+
+console.log(x);
