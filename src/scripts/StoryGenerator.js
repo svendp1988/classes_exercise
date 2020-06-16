@@ -52,7 +52,7 @@ export class StoryGenerator {
         let temperature = this.randomFahrenheit();
         temperature = ukRadio.checked ? `${temperature} degrees Fahrenheit` : `${this.convertToCelsius(temperature)} degrees Celsius`;
 
-        return this.STORY_TEMPLATE
+        return `${this.STORY_TEMPLATE
             .split(" ")
             .map(word => {
                 if (word.startsWith(":")) {
@@ -60,7 +60,7 @@ export class StoryGenerator {
                 }
                 return word;
             })
-            .join(" ");
+            .join(" ")}`;
     }
 
     /* replaceWordByVariable(word) {
