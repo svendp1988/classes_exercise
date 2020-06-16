@@ -27,7 +27,7 @@ export class StoryGenerator {
         return ((temperature  - 32) * 5/9).toFixed(1);
     }
 
-    generateRandomStory() {
+    /* generateRandomStory() {
         return this.STORY_TEMPLATE
             .split(" ")
             .map(word => {
@@ -37,9 +37,33 @@ export class StoryGenerator {
                 return word;
             })
             .join(" ");
+    } */
+
+    generateRandomStory() {
+        const customName = document.getElementById('customname');
+        const ukRadio = document.getElementById("uk");
+
+        let name = this.randomValueFrom(this.NAMES);
+        let place = this.randomValueFrom(this.PLACES);
+        let action = this.randomValueFrom(this.ACTIONS);
+        let nameBox = customName.value.trim() ? customName.value : 'Bob';
+        let weight = this.randomPounds();
+        weight = ukRadio.checked ? `${weight} pounds` : `${this.convertToKg(weight)} kilograms`;
+        let temperature = this.randomFahrenheit();
+        temperature = ukRadio.checked ? `${temperature} degrees Fahrenheit` : `${this.convertToCelsius(temperature)} degrees Celsius`;
+
+        return this.STORY_TEMPLATE
+            .split(" ")
+            .map(word => {
+                if (word.startsWith(":")) {
+                    return word.replace(":", "${").replace(":", "}");
+                }
+                return word;
+            })
+            .join(" ");
     }
 
-    replaceWordByVariable(word) {
+    /* replaceWordByVariable(word) {
         const customName = document.getElementById('customname');
         const ukRadio = document.getElementById("uk");
 
@@ -71,7 +95,7 @@ export class StoryGenerator {
                 break;
             case "place":
                 word = place;
-                break
+                break;
             case "action":
                 word = action;
                 break;
@@ -88,15 +112,6 @@ export class StoryGenerator {
                 throw `Cannot find alternative for word`;
         }
         return word + suffix;
-    }
+    } */
 }
 
-const o = (function() {
-    let x = 123;
-    function getId() {
-        return x;
-    }
-    return getId();
-})();
-
-console.log(x);
